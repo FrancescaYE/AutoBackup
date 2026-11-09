@@ -57,7 +57,7 @@ Les dossiers backups/ et logs/ sont générés et utilisés lors de l’exécuti
 
 ### 1. Cloner le dépôt :
 
-```git clone <URL_DU_DEPOT>```
+```git clone https://github.com/FrancescaYE/AutoBackup.git```
 
 ### 2. Accéder au répertoire du projet :
 
