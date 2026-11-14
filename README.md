@@ -6,17 +6,33 @@ AutoBackup est un outil de sauvegarde automatisée développé en Python. Il per
 
 Chaque exécution crée une sauvegarde horodatée. L’intégrité des fichiers copiés est ensuite vérifiée à l’aide de l’algorithme de hachage SHA-256.
 
+Le programme est configurable en ligne de commande : l’utilisateur peut définir le dossier source et le répertoire de destination au moment de l’exécution.
+
 Ce projet a été réalisé dans le cadre de mon apprentissage de Python et de l’automatisation des tâches informatiques.
+
+## Démonstration
+
+### Rapport de sauvegarde
+![Rapport de sauvegarde](screenshots/backup-report.png)
+
+### Structure de la sauvegarde
+![Structure de la sauvegarde](screenshots/backup-structure.png)
+
+### Protection des chemins
+![Protection des chemins](screenshots/path-validation.png)
 
 ## Fonctionnalités
 
 * Vérification de l’existence et de la validité du dossier source.
+* Configuration personnalisée des chemins source et destination.
 * Création automatique du répertoire de destination.
+* Protection contre une destination située à l’intérieur du dossier source.
 * Copie récursive des fichiers et sous-dossiers.
 * Création de sauvegardes horodatées.
 * Vérification de l’intégrité des fichiers avec SHA-256.
 * Gestion des erreurs et exceptions.
 * Journalisation des opérations avec le module logging.
+* Rapport récapitulatif dans le terminal.
 * Mode simulation (Dry-run) permettant de visualiser les opérations prévues sans effectuer de copie.
 
 ## Technologies utilisées
@@ -27,8 +43,11 @@ Ce projet a été réalisé dans le cadre de mon apprentissage de Python et de l
 * datetime
 * hashlib
 * logging
+* argparse
+* time
 
 Le projet utilise exclusivement la bibliothèque standard de Python. Aucune dépendance externe n’est nécessaire.
+
 
 ## Structure du projet
 ```
@@ -56,16 +75,41 @@ Les dossiers backups/ et logs/ sont générés et utilisés lors de l’exécuti
 ## Installation et exécution
 
 ### 1. Cloner le dépôt :
-
-```git clone https://github.com/FrancescaYE/AutoBackup.git```
-
+```bash
+git clone https://github.com/FrancescaYE/AutoBackup.git
+```
 ### 2. Accéder au répertoire du projet :
 
 ```cd AutoBackup```
 
-### 3. Exécuter le script :
+### 3. Afficher l'aide
 
-```python3 autobackup.py```
+``` python3 autobackup.py --help ```
+
+### 4 .Lancer une sauvegarde :
+
+```python3 autobackup.py <source> <destination>```
+
+Exemple :
+
+python3 autobackup.py test_documents backups
+
+Le programme crée automatiquement un sous-dossier horodaté dans le répertoire de destination.
+
+### Rapport de sauvegarde
+
+À la fin de chaque exécution, un rapport est affiché dans le terminal.
+
+Il présente notamment :
+
+* Le chemin du dossier source.
+* Le chemin de la sauvegarde créée.
+* Le statut de l’opération (SUCCESS ou FAILED).
+* La date et la durée de l’exécution.
+* Le nombre de fichiers copiés.
+* Le nombre de fichiers vérifiés.
+* Le nombre d’échecs.
+
 
 ### Mode simulation (Dry-run)
 
