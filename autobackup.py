@@ -13,11 +13,17 @@ parser = argparse.ArgumentParser(
 )
 parser.add_argument("source", type=Path, help="Directory to backup")
 parser.add_argument("destination", type=Path, help="Backup destination")
+parser.add_argument(
+	"--dry-run",
+	action="store_true",
+	help="simulate a backup without copying files"
+)
 
 args = parser.parse_args()
 
 source = args.source.resolve()
 destination = args.destination.resolve()
+dry_run = args.dry_run
 
 if destination == source or source in destination.parents:
   print("Erreur: La destination ne peut pas être située dans le dossier source.")
@@ -43,8 +49,7 @@ logging.basicConfig(
 
 
 
-#mode dry_run
-dry_run = False
+
 files_copied = 0
 verified = 0
 failed = 0
